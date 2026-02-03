@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be My Valentine ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: linear-gradient(135deg, #ff8fa3, #ffcad4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      max-width: 420px;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 18px;
+      margin: 6px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .yes {
+      background: #ff5d8f;
+      color: white;
+    }
+
+    .no {
+      background: #eee;
+    }
+
+    .reaction {
+      margin-top: 15px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .show {
+      opacity: 1;
+    }
+
+    .float {
+      position: fixed;
+      bottom: -20px;
+      pointer-events: none;
+      animation: rise 2s linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-110vh) scale(1.7);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>Will you be my Valentine? ❤️</h1>
+
+    <p>
+      I can’t do fancy gifts right now,
+      but I’ve got snacks, a comfy mattress setup,
+      and a cozy movie night just for us.
+    </p>
+
+    <p>
+      What do you say?
+    </p>
+
+    <div class="buttons">
+      <button class="yes" onclick="handleYes()">Yes 💕</button>
+      <button class="no" onclick="handleNo()">Maybe 😅</button>
+    </div>
+
+    <div id="reaction" class="reaction"></div>
+  </div>
+
+  <script>
+    const phoneNumber = "27625504637"; // ← change this
+
+    function floatEmoji(symbol) {
+      const el = document.createElement("div");
+      el.className = "float";
+      el.textContent = symbol;
+
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = 18 + Math.random() * 24 + "px";
+
+      document.body.appendChild(el);
+
+      setTimeout(() => el.remove(), 2000);
+    }
+
+    function burst(symbol) {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => floatEmoji(symbol), i * 60);
+      }
+    }
+
+    function redirect(message) {
+      setTimeout(() => {
+        window.location.href =
+          `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      }, 1800);
+    }
+
+    function handleYes() {
+      const reaction = document.getElementById("reaction");
+      reaction.textContent = "Yay! Movie night it is 🎬🍿";
+      reaction.classList.add("show");
+
+      burst("❤️");
+      redirect("I choose YES ❤️ Movie night with you!");
+    }
+
+    function handleNo() {
+      const reaction = document.getElementById("reaction");
+      reaction.textContent = "Aww… maybe next time 💔";
+      reaction.classList.add("show");
+
+      burst("💔");
+      redirect("Maybe later 😅");
+    }
+
+    const __CODE_OWNER__ = "JOHN_WILLIE_VALENTINE_PAGE_FINAL";
+  </script>
+</body>
+</html>
